@@ -13,12 +13,16 @@ jobs:
          with:
            node-version: '18'
        - name: install dependencies
-         run: npm install 
+         run: npm install
+         working-directory: ./exercise 
        - name: Lint
          run: npm run lint
+         working-directory: ./exercise
        - name: Test code
          run: npm run test
+         working-directory: ./exercise
        - name: Build code
          run: npm run build
+         working-directory: ./exercise
        - name: Deploy code 
          run: echo "Deploying..."                   
