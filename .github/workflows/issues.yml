@@ -1,8 +1,11 @@
 name: Handle Issues
-on: issues
-jobs: 
-   output-info:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Output event details 
-         run: echo "${{ toJSON(github.event) }}"
+on:
+  issues:
+    types: [opened, edited]
+  workflow_dispatch: {}
+jobs:
+  output-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output event details
+        run: printf '%s\n' "${{ toJSON(github.event) }}"
