@@ -1,11 +1,17 @@
 name: Deployment Exercise 12
-on: push
+on: 
+  push:
+    branches: [ main ]
 jobs: 
    lint:
      runs-on: ubuntu-latest
      steps:
        - name: Get code
          uses: actions/checkout@v3
+       - name: Setup Node
+         uses: actions/setup-node@v3
+         with:
+           node-version: '18'
        - name: install dependencies
          run: npm ci 
        - name: Lint
@@ -15,6 +21,10 @@ jobs:
      steps:
        - name: Get code
          uses: actions/checkout@v3
+       - name: Setup Node
+         uses: actions/setup-node@v3
+         with:
+           node-version: '18'
        - name: install dependencies
          run: npm ci 
        - name: Lint
@@ -26,9 +36,13 @@ jobs:
      steps:
        - name: Get code
          uses: actions/checkout@v3
+       - name: Setup Node
+         uses: actions/setup-node@v3
+         with:
+           node-version: '18'
        - name: install dependencies
          run: npm ci 
        - name: Build code
          run: npm run build
        - name: Deploy code 
-         run: echo "Deploying..."                   
+         run: echo "Deploying..."
