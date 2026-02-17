@@ -5,9 +5,6 @@ on:
 jobs: 
    lint:
      runs-on: ubuntu-latest
-     defaults:
-       run:
-         working-directory: ./exercise
      steps:
        - name: Get code
          uses: actions/checkout@v3
@@ -17,31 +14,12 @@ jobs:
            node-version: '18'
        - name: install dependencies
          run: npm install
-       - name: Lint
-         run: npm run lint 
-   test:
-     runs-on: ubuntu-latest
-     defaults:
-       run:
-         working-directory: ./exercise
-     steps:
-       - name: Get code
-         uses: actions/checkout@v3
-       - name: Setup Node
-         uses: actions/setup-node@v3
-         with:
-           node-version: '18'
-       - name: install dependencies
-         run: npm install
+         working-directory: exercise
        - name: Lint
          run: npm run lint
-       - name: Test code
-         run: npm run test
-   deploy:
+         working-directory: exercise 
+   test:
      runs-on: ubuntu-latest
-     defaults:
-       run:
-         working-directory: ./exercise
      steps:
        - name: Get code
          uses: actions/checkout@v3
@@ -51,7 +29,27 @@ jobs:
            node-version: '18'
        - name: install dependencies
          run: npm install
+         working-directory: exercise
+       - name: Lint
+         run: npm run lint
+         working-directory: exercise
+       - name: Test code
+         run: npm run test
+         working-directory: exercise
+   deploy:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Get code
+         uses: actions/checkout@v3
+       - name: Setup Node
+         uses: actions/setup-node@v3
+         with:
+           node-version: '18'
+       - name: install dependencies
+         run: npm install
+         working-directory: exercise
        - name: Build code
          run: npm run build
+         working-directory: exercise
        - name: Deploy code 
          run: echo "Deploying..."
