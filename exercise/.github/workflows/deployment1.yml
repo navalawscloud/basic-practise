@@ -5,6 +5,9 @@ on:
 jobs: 
    deploy:
      runs-on: ubuntu-latest
+     defaults:
+       run:
+         working-directory: ./exercise
      steps:
        - name: Get code
          uses: actions/checkout@v3
@@ -14,15 +17,11 @@ jobs:
            node-version: '18'
        - name: install dependencies
          run: npm install
-         working-directory: ./exercise 
        - name: Lint
          run: npm run lint
-         working-directory: ./exercise
        - name: Test code
          run: npm run test
-         working-directory: ./exercise
        - name: Build code
          run: npm run build
-         working-directory: ./exercise
        - name: Deploy code 
          run: echo "Deploying..."                   
